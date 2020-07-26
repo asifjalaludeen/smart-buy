@@ -1,0 +1,121 @@
+<div class="container pad">
+
+    <div class="row">
+
+      <!-- <div class="col-lg-3">
+
+        <h1 class="my-4">Shop Name</h1>
+        <div class="list-group">
+        <a *ngFor="let category of categories" class="list-group-item">{{category}}</a>
+        </div>
+
+      </div> -->
+
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products; let i=index;">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#">{{product.name}}</a>
+                </h4>
+                <h5>{{product.price | currency:'INR'}}</h5>
+                <p class="card-text text-success" *ngIf="product.quantity != 0">In Stock</p>
+                <p class="card-text text-danger" *ngIf="product.quantity == 0">Out of Stock</p>
+                <div>Quantity: <span class="badge badge-info">{{product.quantity}}</span></div>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted" *ngFor="let j of ' '.repeat(i%5).split('')"><span>&#9733;</span></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="col-lg-4">
+      <div class="card card-container card_form stockform">
+         <div class="alert alert-success stockform" *ngIf="isSuccessful">
+            Stock added successfully
+          </div>
+        <h5 class="card-title">Add Stock</h5>
+          <form
+          name="productform"
+          (ngSubmit)="f.form.valid && addStock()"
+          #f="ngForm"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="productname">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="productname"
+              [(ngModel)]="item.name"
+              required
+              #productname="ngModel"
+            />
+            <div class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && productname.invalid"
+            >
+              Product name is required!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productcat">Category</label>
+              <select name="productcat" class="form-control" data-role="select-dropdown" [(ngModel)]="item.category"
+              #productcat="ngModel">
+                <option value="BOOKS">Books</option>
+                <option value="CLOTHING">Clothing</option>
+                <option value="ELECTRONICS">Electronics</option>
+                <option value="FURNITURES">Furniture</option>
+                <option value="SPORTS">Sports</option>
+              </select>
+          </div>
+
+          <div class="form-group">
+            <label for="productquantity">Quantity</label>
+            <input
+              type="number"
+              class="form-control"
+              name="productquantity"
+              [(ngModel)]="item.quantity"
+              required
+              #productquantity="ngModel"
+            />
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && productquantity.invalid"
+            >
+              Product quantity is required!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productprice">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Enter in INR"
+              name="productprice"
+              [(ngModel)]="item.price"
+              required
+              #productprice="ngModel"
+            />
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && productprice.invalid">
+              Price is required!
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">Add</button>
+          </div>
+        </form>
+        </div>
+    </div>
+    </div>
+  </div>

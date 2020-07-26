@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+  <a href="#" class="navbar-brand">Smart Buy</a>
+  <ul class="navbar-nav mr-auto" routerLinkActive="active">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="home">Home </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="seller" *ngIf="showInventory">My Inventory</a>
+    </li>
+    <li class="nav-item">
+      <a  class="nav-link" routerLink="cart" *ngIf="showCart">My Cart</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="orders">My Orders </a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="register">Sign Up</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="login">Login</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+    <li class="nav-item">
+      <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+    </li>
+    <li class="nav-item">
+      <a href class="nav-link" (click)="logout()">LogOut</a>
+    </li>
+  </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
